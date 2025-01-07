@@ -12,19 +12,77 @@
     xmlns:ViewModels="clr-namespace:ApplicationDSTS.ViewModels" 
     mc:Ignorable="d" d:DesignHeight="1080" d:DesignWidth="1920">
 
+    <UserControl.Resources>
+        <!-- ComboBox Customizing Style -->
+        <Style TargetType="{x:Type dxe:ComboBoxEditItem}" x:Key="ContainerStyle">
+            <Setter Property="Background" Value="{StaticResource MainColor}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        
+        <!--#region GroupBox Customizing Style --> 
+        
+        <Style TargetType="GroupBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <!-- Header 영역 -->
+                            <Border Background="{StaticResource BorderColor}" Margin="5"
+                                    HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <ContentPresenter ContentSource="Header" 
+                                                  Margin="5"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center">
+                                    <!-- 텍스트 스타일 설정 -->
+                                    <ContentPresenter.ContentTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" 
+                                                       Foreground="{StaticResource ForeGroundColor}" 
+                                                       FontFamily="Malgun Gothic"
+                                                       FontWeight="Bold" 
+                                                       FontSize="18"
+                                                       Margin="5,0,0,0"/>
+                                        </DataTemplate>
+                                    </ContentPresenter.ContentTemplate>
+                                </ContentPresenter>
+                            </Border>
+
+                            <!-- 본문 영역 -->
+                            <Border Background="Transparent" 
+                                    BorderBrush="{StaticResource BorderColor}" 
+                                    BorderThickness="2,0,2,2"
+                                    Margin="5,30,5,5">
+                                <ContentPresenter ContentSource="Content"
+                                                  Margin="10"
+                                                  VerticalAlignment="Top"/>
+                            </Border>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--#endregion-->
+    </UserControl.Resources>
+    
     <UserControl.DataContext>
         <ViewModels:MainViewModel/>
     </UserControl.DataContext>
 
     <Grid>
-        <dxdo:DockLayoutManager FloatingMode="Window">
+        <dxdo:DockLayoutManager FloatingMode="Window" Background="{StaticResource BackColor}">
             <dxdo:LayoutGroup>
                 <dxdo:LayoutGroup Orientation="Vertical" ItemWidth="260">
                     
                     <dxdo:TabbedGroup Orientation="Horizontal">
-                        <dxdo:LayoutPanel Caption="System Controls" MinWidth="260" MaxWidth="260" FontFamily="Malgun Gothic"
-                                          AllowClose="False" ShowCloseButton="False"
-                                          Foreground="Black">
+                        <dxdo:LayoutPanel Caption="System Controls" MinWidth="300" MaxWidth="300" FontFamily="Malgun Gothic"
+                                          AllowClose="False" ShowCloseButton="False" ShowPinButton="True" Background="{StaticResource BackColor}">
+                            <dxdo:LayoutPanel.Style>
+                                <Style TargetType="dxdo:LayoutPanel">
+                                    <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+                                </Style>
+                            </dxdo:LayoutPanel.Style>
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -38,9 +96,7 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
 
-                                    <GroupBox Grid.Row="1" Header="Device Address" 
-                                              FontFamily="Malgun Gothic" FontSize="13" Margin="5,0"
-                                              Foreground="{StaticResource ForeGroundColor}">
+                                    <GroupBox Grid.Row="1" Header="Address">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -59,21 +115,28 @@
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
 
-                                            <Label Content="IP Address"
+                                            <Label Content="IP"
                                                    Grid.Row="1" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
-                                            <Label Content="Port Number" 
-                                                   Grid.Row="2" Grid.Column="0" 
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="1"
+                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                            
+                                            <Label Content="Port" 
+                                                   Grid.Row="2" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
-                                            <Label Content="Protocol Mode" 
-                                                   Grid.Row="3" Grid.Column="0" 
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="2"
+                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                            
+                                            <Label Content="Protocol" 
+                                                   Grid.Row="3" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:ComboBoxEdit Grid.Column="1" Grid.Row="3"
+                                                              Margin="2,2,10,2"
+                                                              ItemContainerStyle="{StaticResource ContainerStyle}"/>
                                         </Grid>
                                     </GroupBox>
 
-                                    <GroupBox Grid.Row="2" Header="Control Set."
-                                              FontFamily="Malgun Gothic" FontSize="13" Margin="5,0"
-                                              Foreground="{StaticResource ForeGroundColor}">
+                                    <GroupBox Grid.Row="2" Header="Control">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="55*"/>
@@ -95,9 +158,7 @@
                                         </Grid>
                                     </GroupBox>
 
-                                    <GroupBox Grid.Row="3" Header="Configuration Set." FontSize="13" 
-                                              VerticalContentAlignment="Center" Margin="5,0" Grid.ColumnSpan="2"
-                                              Foreground="{StaticResource ForeGroundColor}">
+                                    <GroupBox Grid.Row="3" Header="Configuration">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="55*"/>
