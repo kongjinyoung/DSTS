@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- HamburgerMenuNavigationButton -->
+    <SolidColorBrush x:Key="Hamburger_Button.Static.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="Hamburger_Button.MouseOver.Background" Color="#FF566184"/>
+    <SolidColorBrush x:Key="Hamburger_Button.Selected.Background" Color="#234CB1"/>
+    <!-- Panel -->
+    <SolidColorBrush x:Key="BackColor">#FFF3F3F3</SolidColorBrush>
+    <SolidColorBrush x:Key="ForeGroundColor">#FF80838F</SolidColorBrush>
+    <!--Main View-->
+    
+    
+    <!--#region Main View-->
+    <!--Label-->
+    <Style x:Key="MainViewLabelStyle" TargetType="Label">
+        <Setter Property="Foreground" Value="{StaticResource ForeGroundColor}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontFamily" Value="Malgun Gothic"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+    <!--#endregion-->
+</ResourceDictionary>
