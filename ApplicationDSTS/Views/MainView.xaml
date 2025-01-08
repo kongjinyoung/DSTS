@@ -20,34 +20,6 @@
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
 
-        <Style TargetType="{x:Type dx:SimpleButton}" x:Key="CustomPinButton">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type dx:SimpleButton}">
-                        <Border Margin="5" Width="10" Height="15"
-                                BorderBrush="Transparent"
-                                CornerRadius="5">
-                            <Grid>
-                                <Path Data="M2,0 L2,8 L0,8 0,10 4,10 4,15 6,15 6,10 10,10 10,8 8,8 8,0 Z" 
-                                      Fill="#FF575757" 
-                                      Width="10" Height="15" 
-                                      HorizontalAlignment="Center" 
-                                      VerticalAlignment="Center" />
-                                <Path Data="M3,1 L3,8 L5,8 5,1" 
-                                      Fill="White" 
-                                      Width="10" Height="15" 
-                                      HorizontalAlignment="Center" 
-                                      VerticalAlignment="Center" />
-                            </Grid>
-
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style TargetType="{x:Type dxdo:LayoutPanel}">
             <Setter Property="AllowClose" Value="False"/>
             <Setter Property="ShowCloseButton" Value="False"/>
@@ -59,18 +31,6 @@
                     <ControlTemplate TargetType="{x:Type dxdo:LayoutPanel}">
                         <Border Margin="0,5,5,5" Background="White">
                             <Grid>
-                                <dx:SimpleButton Style="{StaticResource CustomPinButton}"
-                                                 Foreground="Black"
-                                                 HorizontalAlignment="Right"
-                                                 VerticalAlignment="Top"
-                                                 Margin="0,5,5,0"
-                                                 Padding="0"
-                                                 Visibility="Visible"
-                                                 IsEnabled="True"
-                                                 Command="{Binding PinCommand, RelativeSource={RelativeSource TemplatedParent}}" Click="SimpleButton_Click"
-                                                 >
-                                    
-                                </dx:SimpleButton>
                                 <!-- Header -->
                                 <TextBlock Text="{TemplateBinding Caption}" 
                                                HorizontalAlignment="Center"
