@@ -1,15 +1,35 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+>
     <!-- HamburgerMenuNavigationButton -->
     <SolidColorBrush x:Key="Hamburger_Button.Static.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="Hamburger_Button.MouseOver.Background" Color="#FF566184"/>
     <SolidColorBrush x:Key="Hamburger_Button.Selected.Background" Color="#234CB1"/>
-    <!-- Panel -->
-    <SolidColorBrush x:Key="BackColor">#FFF3F3F3</SolidColorBrush>
-    <SolidColorBrush x:Key="ForeGroundColor">#FF80838F</SolidColorBrush>
-    <!--Main View-->
+    <!-- App Color -->
+
+    <SolidColorBrush x:Key="ForeGroundColor">#FF646464</SolidColorBrush>
+    <SolidColorBrush x:Key="MajorColor">#EB8317</SolidColorBrush>
+    <SolidColorBrush x:Key="MinorColor">#0B4F4E</SolidColorBrush>
     
-    
+    <LinearGradientBrush x:Key="BorderColor" EndPoint="1,0.5" StartPoint="0.5,0">
+        <GradientStop Color="#FFFFAE00" Offset="1"/>
+        <GradientStop Color="#FFC96B5C" Offset=".4"/>
+        <GradientStop Color="#FFE28A31" Offset="0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="BackColor" EndPoint="1,0.5" StartPoint="0.1,0">
+        <GradientStop Color="#FFEAEAEA" Offset="0"/>
+        <GradientStop Color="White" Offset=".4"/>
+        <GradientStop Color="#FFEAEAEA" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ButtonColor" StartPoint="0.4,0.1" EndPoint="0.6,1">
+        <GradientStop Color="#FFF3F3F3" Offset="0"/>
+        <GradientStop Color="White" Offset="1"/>
+        <GradientStop Color="#FFE6E6E6" Offset="1"/>
+    </LinearGradientBrush>
+
     <!--#region Main View-->
     <!--Label-->
     <Style x:Key="MainViewLabelStyle" TargetType="Label">
@@ -17,12 +37,36 @@
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontFamily" Value="Malgun Gothic"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="0,0,5,0"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
+
+    <!--TextEdit-->
+    <Style x:Key="MainViewTextEditStyle" TargetType="dxe:TextEdit">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontFamily" Value="Malgun Gothic"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5,2,0,2"/>
+    </Style>
+    
+    <!--Sci Chart-->
+    <Color x:Key="ColorMapColor_1">#FF14233C</Color>
+    <Color x:Key="ColorMapColor_2">#FF264B93</Color>
+    <Color x:Key="ColorMapColor_3">#FF50C7E0</Color>
+    <Color x:Key="ColorMapColor_4">#FF67BDAF</Color>
+    <Color x:Key="ColorMapColor_5">#FFDC7969</Color>
+    <Color x:Key="ColorMapColor_6">#FFF48420</Color>
+    <Color x:Key="ColorMapColor_7">#FFEC0F6C</Color>
+    <Color x:Key="MainThemeStrokeColor">#50C7E0</Color>
+    <Color x:Key="ExtraThemeStrokeColor_1">#882B91</Color>
     <!--#endregion-->
 </ResourceDictionary>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationDSTS.Models.Managers
 {
-    class DbManager
+    public class DbManager
     {
         #region Database Connect
 

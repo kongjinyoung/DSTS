@@ -7,7 +7,8 @@
     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
     x:Class="ApplicationDSTS.MainWindow"
-    Title="DSS 분석 앱" Height="1040" Width="1920" WindowStartupLocation="CenterScreen" FontFamily="Malgun Gothic" Icon="Assets/64xLogo.ico">
+    Title="DSS 분석 앱" Height="1040" Width="1920" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
+    WindowStyle="None" FontFamily="Malgun Gothic" Icon="Assets/64xLogo.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -46,7 +47,7 @@
         </dxwui:HamburgerMenu>
 
         <!--Log-->
-        <dxr:RibbonStatusBarControl HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" >
+        <dxr:RibbonStatusBarControl HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" dx:ThemeManager.ThemeName="Win11Light">
             
             <dxr:RibbonStatusBarControl.LeftItems>
                 <!--DAS-->
