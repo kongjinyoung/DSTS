@@ -5,13 +5,19 @@
     <SolidColorBrush x:Key="TickTextBrush" Color="Yellow" />
     <!--차트 배경-->
     <LinearGradientBrush x:Key="GridBackgroundBrush" EndPoint="1,0.5" StartPoint="0.1,0">
-        <GradientStop Color="#FFEAEAEA" Offset="0"/>
+        <GradientStop Color="Transparent" Offset="0"/>
     </LinearGradientBrush>
-    <Color x:Key="AxisBandsFill">#FFEAEAEA</Color>
-    <!--Major 간격-->
+    <Color x:Key="AxisBandsFill">Transparent</Color>
+    <!--
+    Major 간격
     <SolidColorBrush x:Key="MajorGridLineBrush" Color="#EB8317" />
-    <!--Minor 간격-->
+    -->
+    
+    <!--
+    Minor 간격
     <SolidColorBrush x:Key="MinorGridLineBrush" Color="#FFC96B5C" />
+    -->
+    
     <!--커서 라인-->
     <SolidColorBrush x:Key="RolloverLineBrush" Color="#0B4F4E" />
     <!--커서 텍스트-->

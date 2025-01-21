@@ -254,7 +254,8 @@
     <Compile Include="Models\Clients\EthernetClientInfo.cs" />
     <Compile Include="Models\Clients\EthernetClientProtocolReceiveFilter.cs" />
     <Compile Include="Models\DataModels\SettingModel.cs" />
-    <Compile Include="Models\DataModels\ViewModel.cs" />
+    <Compile Include="Models\DataModels\AppModel.cs" />
+    <Compile Include="Models\Managers\ConvertManager.cs" />
     <Compile Include="Models\Managers\DbManager.cs" />
     <Compile Include="Models\Managers\StatusManager.cs" />
     <Compile Include="MyCustomTheme.cs" />

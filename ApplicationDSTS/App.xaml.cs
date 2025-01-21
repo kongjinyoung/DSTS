@@ -23,22 +23,36 @@ namespace ApplicationDSTS
     /// </summary>
     public partial class App : Application
     {
+        // views
         public MainView MainView { get; private set; }
         public HistoryView HistoryView { get; private set; }
 
-        public EthernetClient Client { get; private set; }
+        
+        // data managers
         public DbManager DbManager { get; private set; }
         public StatusManager StatusManager { get; private set; }
+        public ConvertManager ConvertManager { get; private set; }
 
-        public CommonDataModel CommonDataModel { get; private set; }
+        // data models
+        public SystemSetDataModel SystemSetDataModel { get; set; }
+        public CommonSetDataModel CommonSetDataModel { get; set; }
+        public ControlSetDataModel ControlSetDataModel { get; set; }
+        public ConfigureSetDataModel ConfigureSetDataModel { get; set; }
+        public TraceSetDataModel TraceSetDataModel { get; set; }
+        public ReferenceSetDataModel ReferenceSetDataModel { get; set; }
+        public OperationSetDataModel OperationSetDataModel { get; set; }
+        public AsyncObservableCollection<HistoryEventData> HistoryEventData { get; set; }
+        public AsyncObservableCollection<HistoryChartData> HistoryChartData { get; set; }
 
+        // App variable
+        public EthernetClient Client { get; private set; }
 
         public readonly Logger nlog = LogManager.GetLogger("");
+        public int DeviceRange { get; set; }
+        public bool DeviceConnection { get; set; } // [T] system start || [F] system stop
+        public bool DeviceStatus { get; set; } // [T] trace || [F] reference/operation
 
-        public bool DeviceConnection { get; set; } //[True] system start //[False] system stop
 
-
-        //public EthernetClient Client { get; private set; }
         public App()
         {
             // kjy@up-tec.co.kr 라이센스
@@ -55,34 +69,63 @@ namespace ApplicationDSTS
         {
             InitManagers();
 
-            //InitDataModels();
+            InitDataModels();
 
             InitViews();
 
+            EthernetClientSet();
 
-            //StatusManager.CurrentCommStatus = StatusManager.CommStatus.None;
+            StatusManager.CurrentCommStatus = StatusManager.CommStatus.None;
         }
         public void InitDataModels()
         {
-            CommonDataModel = new CommonDataModel();
+            SystemSetDataModel = new SystemSetDataModel();
+            SystemSetDataModel = DbManager.LoadSystemData();
 
-        }
+            CommonSetDataModel = new CommonSetDataModel();
+            CommonSetDataModel = DbManager.LoadCommonData();
+
+            ControlSetDataModel = new ControlSetDataModel();
+            ControlSetDataModel = DbManager.LoadControlData();
+
+            ConfigureSetDataModel = new ConfigureSetDataModel();
+            ConfigureSetDataModel = DbManager.LoadConfigureData();
+
+            TraceSetDataModel = new TraceSetDataModel();
+            TraceSetDataModel = DbManager.LoadTraceData();
+
+            ReferenceSetDataModel = new ReferenceSetDataModel();
+            ReferenceSetDataModel = DbManager.LoadReferenceData();
+
+            OperationSetDataModel = new OperationSetDataModel();
+
+            HistoryEventData = new AsyncObservableCollection<HistoryEventData>();
+            HistoryChartData = new AsyncObservableCollection<HistoryChartData>();
+
+            EthernetClientSet();
+        } 
         private void InitManagers()
         {
             StatusManager = new StatusManager();
+            StatusManager.Init();
+
             DbManager = new DbManager();
+
+            ConvertManager = new ConvertManager();
         }        
         private void InitViews()
         {
             MainView = new MainView();
+
             HistoryView = new HistoryView();
         }
 
+        // Super Socket Client
         private void EthernetClientSet()
         {
             // DSS Communication
             Client = new EthernetClient();
-            Client.ReceiveBufferSize = 262144;
+            Client.ReceiveBufferSize = 262144; // Client 최대 바이트 수
 
             Client.Connected += (s, e) =>
             {
@@ -96,11 +139,11 @@ namespace ApplicationDSTS
             {
                 StatusManager.CurrentNetworkStatus = StatusManager.NetworkStatus.Disconnected;
                 DeviceConnection = false;
-                nlog.Error($"disconnected server. (serv) {CommonDataModel.IpAddress}");
+                nlog.Error($"disconnected server. (serv) {CommonSetDataModel.IpAddress}");
                 if (StatusManager.KeepConnection)
                 {
                     Thread.Sleep(3000);
-                    TryConnection_DSTS();
+                    TryConnection();
                 }
 
                 MessageBox.Show("DSS에서 튕김" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "DSS System Message", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -114,13 +157,13 @@ namespace ApplicationDSTS
                 if (StatusManager.KeepConnection)
                 {
                     Thread.Sleep(3000);
-                    TryConnection_DSTS();
+                    TryConnection();
                 }
             };
 
-            TryConnection_DSTS();
+            TryConnection();
         }
-        private void TryConnection_DSTS()
+        private void TryConnection()
         {
             if (!StatusManager.KeepConnection)
             {
@@ -134,9 +177,9 @@ namespace ApplicationDSTS
             Task.Factory.StartNew(() =>
             {
                 bool pingable = false;
-                string ip = CommonDataModel.IpAddress;
-                int port = CommonDataModel.Port;
-                nlog.Info($"connecting server. (serv) {CommonDataModel.IpAddress}");
+                string ip = CommonSetDataModel.IpAddress;
+                int port = CommonSetDataModel.Port;
+                nlog.Info($"connecting server. (serv) {CommonSetDataModel.IpAddress}");
                 while (true)
                 {
                     StatusManager.CurrentNetworkStatus = StatusManager.NetworkStatus.TryConnect;
@@ -176,6 +219,7 @@ namespace ApplicationDSTS
                 return pingable;
             }
         }
+
         // 연결
         public async void UpdatingVariableConnectSignal(int time)
         {
@@ -211,6 +255,8 @@ namespace ApplicationDSTS
             await Task.Delay(time);
             StatusManager.CurrentCommStatus = StatusManager.CommStatus.None;
         }
+        private readonly string myip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(a => a.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).ToString();
+
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);

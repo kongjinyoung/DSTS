@@ -14,19 +14,11 @@
     mc:Ignorable="d" d:DesignHeight="1080" d:DesignWidth="1920">
     <UserControl.Resources>
         <s:GradientStopsToLinearGradientBrushConverter x:Key="ColorsToLineatGradientBrushConverter"/>
-        <!-- ComboBox Customizing Style -->
-        <Style TargetType="{x:Type dxe:ComboBoxEditItem}" x:Key="ContainerStyle">
-            <Setter Property="Background" Value="{StaticResource MajorColor}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
 
         <Style TargetType="{x:Type dxdo:LayoutPanel}">
             <Setter Property="AllowDrag" Value="False"/>
             <Setter Property="AllowClose" Value="False"/>
             <Setter Property="ShowCloseButton" Value="False"/>
-            <Setter Property="AllowFloat" Value="True"/>
-            <Setter Property="ShowPinButton" Value="True"/>
-            <Setter Property="AllowDock" Value="{Binding PinCommand}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type dxdo:LayoutPanel}">
@@ -45,9 +37,7 @@
                                            FontFamily="Malgun Gothic"
                                            FontWeight="Bold" 
                                            FontSize="18"
-                                           Margin="5" />
-
-
+                                           Margin="0,0,0,0" />
                                 <!-- Content -->
                                 <ContentPresenter Margin="5,30,5,5" />
                             </Grid>
@@ -63,7 +53,7 @@
                     <ControlTemplate TargetType="{x:Type GroupBox}">
                         <Grid>
                             <!-- Header 영역 -->
-                            <Border Margin="5"
+                            <Border Margin="0,0,5,0"
                                     HorizontalAlignment="Stretch" VerticalAlignment="Top">
                                 <Border.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -81,7 +71,7 @@
                                         <DataTemplate>
                                             <TextBlock Text="{Binding}" 
                                                        Foreground="White" 
-                                                       FontFamily="Malgun Gothic"
+                                                       FontFamily="Consolas"
                                                        FontWeight="Bold" 
                                                        FontSize="15"
                                                        Height="25"
@@ -93,7 +83,7 @@
 
                             <!-- 본문 영역 -->
                             <Border BorderThickness="3"
-                                    Margin="5,30,5,5">
+                                    Margin="0,30,5,5">
                                 <Border.BorderBrush>
                                     <LinearGradientBrush EndPoint="1,0.5" StartPoint="0.5,0">
                                         <GradientStop Color="#FFFFAE00" Offset="1"/>
@@ -120,7 +110,7 @@
         </Style>
 
         <DataTemplate x:Key="borderTemplate">
-            <Border x:Name="border" Width="50"  Height="22"
+            <Border x:Name="border" Width="50"  Height="26"
                    Background="Transparent" 
                    BorderThickness="1" 
                    BorderBrush="{StaticResource ForeGroundColor}" 
@@ -140,7 +130,7 @@
                     <LinearGradientBrush EndPoint="1,0.5" StartPoint="0.1,0">
                         <GradientStop Color="Red" Offset="1"/>
                         <GradientStop Color="#FFFFA3A3" Offset=".4" />
-                        <GradientStop Color="Red" Offset="0"/>
+                        <GradientStop Color="#FF970303" Offset="0"/>
                     </LinearGradientBrush>
                 </Ellipse.Fill>
             </Ellipse>
@@ -149,9 +139,9 @@
                     <Setter Property="Fill" TargetName="thumb">
                         <Setter.Value>
                             <LinearGradientBrush EndPoint="1,0.5" StartPoint="0.1,0">
-                                <GradientStop Color="#FF23FF00" Offset="1"/>
+                                <GradientStop Color="#FF1ABD00" Offset="1"/>
                                 <GradientStop Color="#FFD9FFA3" Offset=".4" />
-                                <GradientStop Color="#FF23FF00" Offset="0"/>
+                                <GradientStop Color="#FF169B01" Offset="0"/>
                             </LinearGradientBrush>
                         </Setter.Value>
                     </Setter>
@@ -227,7 +217,7 @@
             <dxdo:LayoutGroup>
                 <dxdo:LayoutGroup Orientation="Horizontal">
                     <dxdo:TabbedGroup FontWeight="Bold" FontFamily="Malgun Gothic" Margin="5,0,0,5" MinWidth="240" MaxWidth="240">
-                        <dxdo:LayoutPanel x:Name="layout1" Caption="System Control" MinWidth="240" MaxWidth="240">
+                        <dxdo:LayoutPanel Caption="SYSTEM SET." MinWidth="240" MaxWidth="240">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -242,7 +232,7 @@
                                     </Grid.RowDefinitions>
 
                                     <!--DSTS Address Group-->
-                                    <GroupBox Grid.Row="1" Header="Device Address">
+                                    <GroupBox Grid.Row="1" Header="Device Address" Margin="0,0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -254,7 +244,7 @@
                                                 <RowDefinition Height="32"/>
                                                 <RowDefinition Height="32"/>
                                                 <RowDefinition Height="32"/>
-                                                <RowDefinition Height="15"/>
+                                                <RowDefinition Height="5"/>
                                                 <RowDefinition Height="35"/>
                                                 <RowDefinition Height="5"/>
                                                 <RowDefinition Height="35"/>
@@ -265,25 +255,55 @@
                                                    Grid.Row="1" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="1"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding CommonSetDataModel.IpAddress, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
                                             <Label Content="Port" 
                                                    Grid.Row="2" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="2"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding CommonSetDataModel.Port, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
                                             <Label Content="Protocol" 
                                                    Grid.Row="3" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:ComboBoxEdit Grid.Column="1" Grid.Row="3"
                                                               Margin="5,2,0,2"
-                                                              ItemContainerStyle="{StaticResource ContainerStyle}"/>
+                                                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Normal"
+                                                              SelectedItem="{Binding CommonSetDataModel.Protocol, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"
+                                                              ItemsSource="{Binding ProtocolModeList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <dx:SimpleButton Content="Sleep Mode" 
+                                                             Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                             FontFamily="Microsoft YaHei UI" BorderThickness="1" 
+                                                             HorizontalContentAlignment="Center" 
+                                                             Margin="0"  FontSize="13" FontWeight="Normal"
+                                                             Focusable="False"
+                                                             dx:ThemeManager.ThemeName="Win10Light"
+                                                             Foreground="{StaticResource ForeGroundColor}"
+                                                             BorderBrush="{StaticResource ForeGroundColor}"
+                                                             Background="{StaticResource ButtonBackColor}"
+                                                             Glyph="{dx:DXImage 'SvgImages/Icon Builder/Security_Lock.svg'}"
+                                                             Command="{Binding Cmd_SleepMode}"/>
+                                            
+                                            <dx:SimpleButton Content="Change Address" 
+                                                             Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                             FontFamily="Microsoft YaHei UI" BorderThickness="1" 
+                                                             HorizontalContentAlignment="Center" 
+                                                             Margin="0"  FontSize="13" FontWeight="Normal"
+                                                             Focusable="False"
+                                                             dx:ThemeManager.ThemeName="Win10Light"
+                                                             Foreground="{StaticResource ForeGroundColor}"
+                                                             BorderBrush="{StaticResource ForeGroundColor}"
+                                                             Background="{StaticResource ButtonBackColor}"
+                                                             Glyph="{dx:DXImage 'SvgImages/Outlook Inspired/ChangeView.svg'}"
+                                                             Command="{Binding Cmd_ChangeAddress}"/>
                                         </Grid>
                                     </GroupBox>
 
                                     <!--DSTS Control Group-->
-                                    <GroupBox Grid.Row="2" Header="DSTS Control">
+                                    <GroupBox Grid.Row="2" Header="DSTS Control" Margin="0,0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="55*"/>
@@ -304,10 +324,10 @@
                                                               ToggleSwitchWidth="50" ToggleSwitchHeight="26" Width="70"
                                                               HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                                               AnimationMode="OnToggle"
+                                                              dx:ThemeManager.ThemeName="Office2019Colorful"
                                                               SwitchBorderTemplate="{StaticResource borderTemplate}"
                                                               SwitchThumbTemplate="{StaticResource thumbTemplate}"
-                                                              Command="{Binding LightStatus}"
-                                                              dx:ThemeManager.ThemeName="Office2019Colorful" Margin="0"/>
+                                                              IsChecked="{Binding ControlSetDataModel.LightStatus, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
                                             <Label Content="Pulse status"
                                                    Grid.Row="3" Grid.Column="0"
@@ -316,15 +336,15 @@
                                                               ToggleSwitchWidth="50" ToggleSwitchHeight="26" Width="70"
                                                               HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                                               AnimationMode="OnToggle"
+                                                              dx:ThemeManager.ThemeName="Office2019Colorful"
                                                               SwitchBorderTemplate="{StaticResource borderTemplate}"
                                                               SwitchThumbTemplate="{StaticResource thumbTemplate}"
-                                                              Command="{Binding PulseStatus}"
-                                                              dx:ThemeManager.ThemeName="Office2019Colorful"/>
+                                                              IsChecked="{Binding ControlSetDataModel.PulseStatus, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
                                         </Grid>
                                     </GroupBox>
 
                                     <!--DSTS Configuration Group-->
-                                    <GroupBox Grid.Row="3" Header="DSTS Configuration">
+                                    <GroupBox Grid.Row="3" Header="DSTS Configuration" Margin="0,0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="55*"/>
@@ -343,80 +363,142 @@
                                                 <RowDefinition Height="35"/>
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
-
-                                            <Label Content="Spatial Res."
+                                            <!--공간 분해능-->
+                                            <Label Content="Spat. Res."
                                                    Grid.Row="1" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="1"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
-
-                                            <Label Content="Sampling Interval"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ConfigureSetDataModel.SpatRes, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <!--공간 샘플링 간격-->
+                                            <Label Content="Samp. interval"
                                                    Grid.Row="2" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="2"
-                                                          Style="{StaticResource MainViewTextEditStyle}" Template="{DynamicResource TextEditControlTemplate1}"/>
-
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ConfigureSetDataModel.SampInterval, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <!--계측 거리-->
                                             <Label Content="Range"
                                                    Grid.Row="3" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="3"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
-
-                                            <Label Content="Integration Num."
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ConfigureSetDataModel.Range, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <!--적분 횟수-->
+                                            <Label Content="Integ. Num."
                                                    Grid.Row="4" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
-                                            <dxe:TextEdit Grid.Column="1" Grid.Row="4"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
-
-                                            <Label Content="Init Freq."
+                                            <dxe:ComboBoxEdit Grid.Column="1" Grid.Row="4"
+                                                              Margin="5,2,0,2"
+                                                              FontWeight="Normal" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                                              SelectedItem="{Binding ConfigureSetDataModel.IntegNum, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"
+                                                              ItemsSource="{Binding IntegNumList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <!--시작 탐사 주파수-->
+                                            <Label Content="Init. Freq."
                                                    Grid.Row="5" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="5"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
-
-                                            <Label Content="Sample Interval"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ConfigureSetDataModel.InitFreq, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <!--탐사 주파수 간격-->
+                                            <Label Content="Sample interval"
                                                    Grid.Row="6" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="6"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
-
-                                            <Label Content="Sample Number"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ConfigureSetDataModel.SweepInterval, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <!--탐사 주파스 스윕 횟수-->
+                                            <Label Content="Sample Num."
                                                    Grid.Row="7" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="7"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ConfigureSetDataModel.SweepNum, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
                                             <dx:SimpleButton Content="Save Config." 
                                                              Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" 
                                                              FontFamily="Microsoft YaHei UI" BorderThickness="1" 
                                                              HorizontalContentAlignment="Center" 
-                                                             Margin="0"  FontSize="13"
+                                                             Margin="0"  FontSize="13" FontWeight="Normal"
                                                              Focusable="False"
                                                              dx:ThemeManager.ThemeName="Win10Light"
                                                              Foreground="{StaticResource ForeGroundColor}"
                                                              BorderBrush="{StaticResource ForeGroundColor}"
-                                                             Background="{StaticResource ButtonColor}"
-                                                             Glyph="{dx:DXImage SvgImages/XAF/Action_LocalizationExport.svg}"/>
+                                                             Background="{StaticResource ButtonBackColor}"
+                                                             Glyph="{dx:DXImage SvgImages/XAF/Action_LocalizationExport.svg}"
+                                                             Command="{Binding Cmd_SaveConfigure}"/>
                                         </Grid>
                                     </GroupBox>
                                 </Grid>
                             </ScrollViewer>
                         </dxdo:LayoutPanel>
 
-                        <dxdo:LayoutPanel Caption="Trace Controls" MinWidth="240" MaxWidth="240" FontFamily="Malgun Gothic"
-                                          AllowClose="False" ShowCloseButton="False">
+                        <dxdo:LayoutPanel Caption="TRACE SET." MinWidth="240" MaxWidth="240"
+                                          IsSelectedItem="{Binding SelectTrace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="105"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="310"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <!--Trace Group-->
-                                    <GroupBox Grid.Row="0" Header="Trace Settings" FontSize="13" 
-                                              VerticalContentAlignment="Center" Margin="5,0" Grid.ColumnSpan="2"
+
+                                    <!--Trace Operation Group-->
+                                    <GroupBox Grid.Row="0" Header="Trace control" FontSize="13"
+                                              VerticalContentAlignment="Center" Margin="0,0" Grid.ColumnSpan="2"
+                                              Foreground="{StaticResource ForeGroundColor}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5"/>
+                                                <RowDefinition Height="35"/>
+                                                <RowDefinition Height="5"/>
+                                            </Grid.RowDefinitions>
+
+
+                                            <dx:SimpleButton Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                             Margin="0,1,0,1"  FontSize="13"
+                                                             FontFamily="Microsoft YaHei UI" HorizontalContentAlignment="Center" 
+                                                             dx:ThemeManager.ThemeName="Win10Light"
+                                                             Focusable="False" ButtonKind="Toggle"
+                                                             Foreground="#FF970303"
+                                                             FontWeight="Normal"
+                                                             Background="{StaticResource ButtonBackColor}"
+                                                             Command="{Binding Cmd_TraceMovement}"
+                                                             IsChecked="{Binding TraceButtonBusy}"
+                                                             IsEnabled="{Binding TraceButtonEnable}">
+                                                <dx:SimpleButton.Style>
+                                                    <Style TargetType="{x:Type dx:SimpleButton}">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding TraceButtonBusy}" Value="True">
+                                                                <Setter Property="Content" Value="Start Trace"/>
+                                                                <Setter Property="Glyph" Value="pack://application:,,,/DevExpress.Images.v23.1;component/SvgImages/XAF/Action_Debug_Start.svg"/>
+                                                                <Setter Property="BorderBrush" Value="{StaticResource StartButton}"/>
+                                                                <Setter Property="BorderThickness" Value="2"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding TraceButtonBusy}" Value="False">
+                                                                <Setter Property="Content" Value="Stop Trace"/>
+                                                                <Setter Property="Glyph" Value="pack://application:,,,/DevExpress.Images.v23.1;component/SvgImages/XAF/Action_Close.svg"/>
+                                                                <Setter Property="BorderBrush" Value="{StaticResource StopButton}"/>
+                                                                <Setter Property="BorderThickness" Value="2"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </dx:SimpleButton.Style>
+                                            </dx:SimpleButton>
+                                        </Grid>
+                                    </GroupBox>
+
+                                    <!--Trace Settings Group-->
+                                    <GroupBox Grid.Row="1" Header="Configure Trace" FontSize="13" 
+                                              VerticalContentAlignment="Center" Margin="0,0" Grid.ColumnSpan="2"
                                               Foreground="{StaticResource ForeGroundColor}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -427,7 +509,7 @@
                                                 <RowDefinition Height="5"/>
                                                 <RowDefinition Height="32"/>
                                                 <RowDefinition Height="32"/>
-                                                <RowDefinition Height="15"/>
+                                                <RowDefinition Height="5"/>
                                                 <RowDefinition Height="32"/>
                                                 <RowDefinition Height="32"/>
                                                 <RowDefinition Height="32"/>
@@ -441,77 +523,90 @@
                                             </Grid.RowDefinitions>
 
                                             <Label Content="Trace Mode"
-                                                   Grid.Row="1" Grid.Column="0" FontWeight="Bold"
-                                                   Foreground="Black" FontSize="14"
-                                                   Style="{StaticResource MainViewLabelStyle}"/>
-                                            <dxe:ToggleSwitch Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
-                                                              ToggleSwitchWidth="50" ToggleSwitchHeight="26" Width="150"
-                                                              CheckedStateContent="Pair" UncheckedStateContent="Single" ContentPlacement="Both" AnimationMode="OnToggle" 
-                                                              FontSize="13" FontFamily="Malgun Gothic" FontWeight="Bold"                                                  
-                                                              HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Stretch"
-                                                              Foreground="{StaticResource ForeGroundColor}"
+                                                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" Width="92" Padding="0"
+                                                   Foreground="Black" FontSize="14" HorizontalAlignment="Left"
+                                                   Style="{StaticResource MainViewLabelStyle}" Margin="0"/>
+                                            <dxe:ToggleSwitch Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"
+                                                              ToggleSwitchWidth="50" ToggleSwitchHeight="26" Width="145"
+                                                              HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Stretch"                                                                                                                            
+                                                              CheckedStateContent="Pair" UncheckedStateContent="Single" ContentPlacement="Both"
+                                                              AnimationMode="OnToggle"
+                                                              dx:ThemeManager.ThemeName="Office2019Colorful" Height="26"
                                                               SwitchBorderTemplate="{StaticResource borderTemplate}"
-                                                              SwitchThumbTemplate="{StaticResource thumbTemplate}"
-                                                              IsChecked="{Binding TraceMode}"/>
+                                                              SwitchThumbTemplate="{StaticResource thumbTemplate}"                                                              
+                                                              IsChecked="{Binding TraceMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="17,3,22,3"/>
 
                                             <Label Content="EDFA 1"
                                                    Grid.Row="4" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="4"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TraceSetDataModel.Edfa1, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
                                             <Label Content="EDFA 2"
                                                    Grid.Row="5" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="5"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TraceSetDataModel.Edfa2, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                            <Label Content="Atten. Bias 1"
+                                            <Label Content="Atten. bias 1"
                                                    Grid.Row="6" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="6"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TraceSetDataModel.ABias1, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                            <Label Content="Atten. Bias 2"
+                                            <Label Content="Atten. bias 2"
                                                    Grid.Row="7" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="7"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TraceSetDataModel.ABias2, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
                                             <Label Content="Probe Freq."
                                                    Grid.Row="8" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="8"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TraceSetDataModel.ProbFreq, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                            <Label Content="EOM Bias"
+                                            <Label Content="EOM bias"
                                                    Grid.Row="9" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="9"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TraceSetDataModel.EomBias, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                            <Label Content="EOM Switch"
+                                            <Label Content="EOM switch"
                                                    Grid.Row="10" Grid.Column="0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
-                                            <dxe:TextEdit Grid.Column="1" Grid.Row="10"
-                                                          Style="{StaticResource MainViewTextEditStyle}"/>
+                                            <dxe:ToggleSwitch Grid.Row="10" Grid.Column="1"
+                                                              ToggleSwitchWidth="50" ToggleSwitchHeight="26" Width="80" Margin="0,0,0,0"
+                                                              CheckedStateContent="ON" UncheckedStateContent="OFF" ContentPlacement="Far" AnimationMode="OnToggle" 
+                                                              FontSize="13" FontFamily="Malgun Gothic" FontWeight="Bold"                                                  
+                                                              HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Stretch"
+                                                              Foreground="{StaticResource ForeGroundColor}"
+                                                              SwitchBorderTemplate="{StaticResource borderTemplate}"
+                                                              SwitchThumbTemplate="{StaticResource thumbTemplate}"
+                                                              IsChecked="{Binding TraceSetDataModel.EomSwitch, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
 
                                             <dx:SimpleButton Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Content="Save Trace" 
-                                                             Margin="0,1,0,1"  FontSize="13"
+                                                             Margin="0,1,0,1"  FontSize="13" FontWeight="Normal"
                                                              FontFamily="Microsoft YaHei UI" BorderThickness="1" HorizontalContentAlignment="Center" 
-                                                             dx:ThemeManager.ThemeName="Office2019Colorful"
+                                                             dx:ThemeManager.ThemeName="Win10Light"
                                                              Focusable="False"
                                                              Foreground="{StaticResource ForeGroundColor}"
                                                              BorderBrush="{StaticResource ForeGroundColor}"
-                                                             Background="{StaticResource ButtonColor}"
+                                                             Background="{StaticResource ButtonBackColor}"
                                                              Command="{Binding Cmd_SaveTrace}"
                                                              Glyph="{dx:DXImage SvgImages/XAF/Action_LocalizationExport.svg}"/>
                                         </Grid>
                                     </GroupBox>
 
                                     <!--Trace Chart Setting Group-->
-                                    <GroupBox Grid.Row="5" Header="Trace Chart Set." FontSize="13" 
-                                              VerticalContentAlignment="Center" Margin="5,0" Grid.ColumnSpan="2"
+                                    <GroupBox Grid.Row="2" Header="Chart settings" FontSize="13" 
+                                              VerticalContentAlignment="Center" Margin="0,0" Grid.ColumnSpan="2"
                                               Foreground="{StaticResource ForeGroundColor}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -532,51 +627,337 @@
                                                 <RowDefinition Height="*"/>
                                             </Grid.RowDefinitions>
 
-                                            <Label Content="X-Min"
-                                                   Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"
+                                            <Label Content="X Min"
+                                                   Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="0" Grid.Row="2" Margin="2"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TRACE_XMinEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="X Max"
+                                                   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="2" Margin="2"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TRACE_XMaxEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="Y Min"
+                                                   Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="0" Grid.Row="4" Margin="2"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TRACE_YMinEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="Y Max"
+                                                   Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="4" Margin="2"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TRACE_YMaxEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="Color Min"
+                                                   Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="0" Grid.Row="6" Margin="2"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TRACE_ColorMinEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="Color Max"
+                                                   Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="6" Margin="2"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding TRACE_ColorMaxEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <dx:SimpleButton Content="Change Chart" 
+                                                             Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                             Margin="0,1,0,1"  FontSize="13" FontWeight="Normal"
+                                                             FontFamily="Microsoft YaHei UI" BorderThickness="1" HorizontalContentAlignment="Center" 
+                                                             dx:ThemeManager.ThemeName="Win10Light"
+                                                             Focusable="False"
+                                                             Foreground="{StaticResource ForeGroundColor}"
+                                                             BorderBrush="{StaticResource ForeGroundColor}"
+                                                             Background="{StaticResource ButtonBackColor}"
+                                                             Command="{Binding Cmd_ChangeTraceAxis}"
+                                                             Glyph="{dx:DXImage SvgImages/Dashboards/ConvertTo.svg}"/>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+                            </ScrollViewer>
+                        </dxdo:LayoutPanel>
+
+                        <dxdo:LayoutPanel Caption="OPERATION SET." MinWidth="240" MaxWidth="240"
+                                          IsSelectedItem="{Binding SelectOperation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="145"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="310"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!--Trace Operation Group-->
+                                    <GroupBox Grid.Row="0" Header="Operation control" FontSize="13"
+                                              VerticalContentAlignment="Center" Margin="0" Grid.ColumnSpan="2"
+                                              Foreground="{StaticResource ForeGroundColor}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5"/>
+                                                <RowDefinition Height="35"/>
+                                                <RowDefinition Height="5"/>
+                                                <RowDefinition Height="35"/>
+                                                <RowDefinition Height="5"/>
+                                            </Grid.RowDefinitions>
+
+
+                                            <dx:SimpleButton Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                             Margin="0,1,0,1"  FontSize="13"
+                                                             FontFamily="Microsoft YaHei UI" HorizontalContentAlignment="Center" 
+                                                             dx:ThemeManager.ThemeName="Win10Light"
+                                                             Focusable="False" ButtonKind="Toggle"
+                                                             FontWeight="Normal"
+                                                             Foreground="#FF970303"
+                                                             Background="{StaticResource ButtonBackColor}"
+                                                             Command="{Binding Cmd_ReferenceMovement}"
+                                                             IsChecked="{Binding ReferenceButtonBusy}"
+                                                             IsEnabled="{Binding ReferenceButtonEnable}">
+                                                <dx:SimpleButton.Style>
+                                                    <Style TargetType="{x:Type dx:SimpleButton}">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding ReferenceButtonBusy}" Value="True">
+                                                                <Setter Property="Content" Value="Start Reference"/>
+                                                                <Setter Property="Glyph" Value="pack://application:,,,/DevExpress.Images.v23.1;component/SvgImages/XAF/Action_Debug_Start.svg"/>
+                                                                <Setter Property="BorderBrush" Value="{StaticResource StartButton}"/>
+                                                                <Setter Property="BorderThickness" Value="2"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding ReferenceButtonBusy}" Value="False">
+                                                                <Setter Property="Content" Value="Stop Reference"/>
+                                                                <Setter Property="Glyph" Value="pack://application:,,,/DevExpress.Images.v23.1;component/SvgImages/XAF/Action_Close.svg"/>
+                                                                <Setter Property="BorderBrush" Value="{StaticResource StopButton}"/>
+                                                                <Setter Property="BorderThickness" Value="2"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </dx:SimpleButton.Style>
+                                            </dx:SimpleButton>
+
+                                            <dx:SimpleButton Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                             Margin="0,1,0,1"  FontSize="13"
+                                                             FontFamily="Microsoft YaHei UI" HorizontalContentAlignment="Center" 
+                                                             dx:ThemeManager.ThemeName="Win10Light"
+                                                             Focusable="False" ButtonKind="Toggle"
+                                                             FontWeight="Normal"
+                                                             Foreground="#FF970303"
+                                                             Background="{StaticResource ButtonBackColor}"
+                                                             Command="{Binding Cmd_OperationMovement}"
+                                                             IsChecked="{Binding OperationButtonBusy}"
+                                                             IsEnabled="{Binding OperationButtonEnable}">
+                                                <dx:SimpleButton.Style>
+                                                    <Style TargetType="{x:Type dx:SimpleButton}">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding OperationButtonBusy}" Value="True">
+                                                                <Setter Property="Content" Value="Start Operation"/>
+                                                                <Setter Property="Glyph" Value="pack://application:,,,/DevExpress.Images.v23.1;component/SvgImages/XAF/Action_Debug_Start.svg"/>
+                                                                <Setter Property="BorderBrush" Value="{StaticResource StartButton}"/>
+                                                                <Setter Property="BorderThickness" Value="2"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding OperationButtonBusy}" Value="False">
+                                                                <Setter Property="Content" Value="Stop Operation"/>
+                                                                <Setter Property="Glyph" Value="pack://application:,,,/DevExpress.Images.v23.1;component/SvgImages/XAF/Action_Close.svg"/>
+                                                                <Setter Property="BorderBrush" Value="{StaticResource StopButton}"/>
+                                                                <Setter Property="BorderThickness" Value="2"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </dx:SimpleButton.Style>
+                                            </dx:SimpleButton>
+                                        </Grid>
+                                    </GroupBox>
+
+                                    <!--Trace Settings Group-->
+                                    <GroupBox Grid.Row="1" Header="Configure Trace" FontSize="13" 
+                                              VerticalContentAlignment="Center" Margin="0,0" Grid.ColumnSpan="2"
+                                              Foreground="{StaticResource ForeGroundColor}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="35"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Label Content="Temperature area"
+                                                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" Width="183" Padding="0"
+                                                   Foreground="Black" FontSize="14" HorizontalAlignment="Left"
+                                                   Style="{StaticResource MainViewLabelStyle}" Margin="0"/>
+
+                                            <Label Content="Start point [m]"
+                                                   Grid.Row="2" Grid.Column="0" Margin="0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="2"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ReferenceSetDataModel.Ref_Ts, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="End point [m]"
+                                                   Grid.Row="3" Grid.Column="0" Margin="0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="3"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ReferenceSetDataModel.Ref_Td, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="Pres. temp. [℃]"
+                                                   Grid.Row="4" Grid.Column="0" Margin="0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="4"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ReferenceSetDataModel.Ref_Temp, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="Detection area"
+                                                   Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" Width="183" Padding="0"
+                                                   Foreground="Black" FontSize="14" HorizontalAlignment="Left"
+                                                   Style="{StaticResource MainViewLabelStyle}" Margin="0"/>
+                                            
+                                            <Label Content="Start point [m]"
+                                                   Grid.Row="6" Grid.Column="0" Margin="0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="6"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ReferenceSetDataModel.Ref_Ds, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="End point [m]"
+                                                   Grid.Row="7" Grid.Column="0" Margin="0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:TextEdit Grid.Column="1" Grid.Row="7"
+                                                          Style="{StaticResource MainViewTextEditStyle}"
+                                                          EditValue="{Binding ReferenceSetDataModel.Ref_Dd, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <Label Content="Save ref."
+                                                   Grid.Row="8" Grid.Column="0" Margin="0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:ToggleSwitch Grid.Row="8" Grid.Column="1"
+                                                              ToggleSwitchWidth="50" ToggleSwitchHeight="26" Width="80" Margin="0,0,0,0"
+                                                              CheckedStateContent="ON" UncheckedStateContent="OFF" ContentPlacement="Far" AnimationMode="OnToggle" 
+                                                              FontSize="13" FontFamily="Malgun Gothic" FontWeight="Bold"                                                  
+                                                              HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Stretch"
+                                                              Foreground="{StaticResource ForeGroundColor}"
+                                                              SwitchBorderTemplate="{StaticResource borderTemplate}"
+                                                              SwitchThumbTemplate="{StaticResource thumbTemplate}"                                                              
+                                                              IsChecked="{Binding SaveReference}"/>
+
+                                            <Label Content="Save oper."
+                                                   Grid.Row="9" Grid.Column="0" Margin="0"
+                                                   Style="{StaticResource MainViewLabelStyle}"/>
+                                            <dxe:ToggleSwitch Grid.Row="9" Grid.Column="1"
+                                                              ToggleSwitchWidth="50" ToggleSwitchHeight="26" Width="80" Margin="0,0,0,0"
+                                                              CheckedStateContent="ON" UncheckedStateContent="OFF" ContentPlacement="Far" AnimationMode="OnToggle" 
+                                                              FontSize="13" FontFamily="Malgun Gothic" FontWeight="Bold"                                                  
+                                                              HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Stretch"
+                                                              Foreground="{StaticResource ForeGroundColor}"
+                                                              SwitchBorderTemplate="{StaticResource borderTemplate}"
+                                                              SwitchThumbTemplate="{StaticResource thumbTemplate}"
+                                                              IsChecked="{Binding SaveOperation}"/>
+
+                                            <dx:SimpleButton Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Content="Save Trace" 
+                                                             Margin="0,1,0,1"  FontSize="13" FontWeight="Normal"
+                                                             FontFamily="Microsoft YaHei UI" BorderThickness="1" HorizontalContentAlignment="Center" 
+                                                             dx:ThemeManager.ThemeName="Win10Light"
+                                                             Focusable="False"
+                                                             Foreground="{StaticResource ForeGroundColor}"
+                                                             BorderBrush="{StaticResource ForeGroundColor}"
+                                                             Background="{StaticResource ButtonBackColor}"
+                                                             Command="{Binding Cmd_SaveTrace}"
+                                                             Glyph="{dx:DXImage SvgImages/XAF/Action_LocalizationExport.svg}"/>
+                                        </Grid>
+                                    </GroupBox>
+
+                                    <!--Trace Chart Setting Group-->
+                                    <GroupBox Grid.Row="2" Header="Chart settings" FontSize="13" 
+                                              VerticalContentAlignment="Center" Margin="0,0" Grid.ColumnSpan="2"
+                                              Foreground="{StaticResource ForeGroundColor}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="35"/>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Label Content="X Min"
+                                                   Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="0" Grid.Row="2" Margin="2"
                                                           Style="{StaticResource MainViewTextEditStyle}"/>
 
-                                            <Label Content="X-Max"
-                                                   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"
+                                            <Label Content="X Max"
+                                                   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="2" Margin="2"
                                                           Style="{StaticResource MainViewTextEditStyle}"/>
 
-                                            <Label Content="Y-Min"
-                                                   Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"
+                                            <Label Content="Y Min"
+                                                   Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="0" Grid.Row="4" Margin="2"
                                                           Style="{StaticResource MainViewTextEditStyle}"/>
 
-                                            <Label Content="Y-Max"
-                                                   Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center"
+                                            <Label Content="Y Max"
+                                                   Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="4" Margin="2"
                                                           Style="{StaticResource MainViewTextEditStyle}"/>
 
                                             <Label Content="Color Min"
-                                                   Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center"
+                                                   Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="5,0,0,0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="0" Grid.Row="6" Margin="2"
                                                           Style="{StaticResource MainViewTextEditStyle}"/>
 
                                             <Label Content="Color Max"
-                                                   Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"
+                                                   Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0"
                                                    Style="{StaticResource MainViewLabelStyle}"/>
                                             <dxe:TextEdit Grid.Column="1" Grid.Row="6" Margin="2"
                                                           Style="{StaticResource MainViewTextEditStyle}"/>
 
                                             <dx:SimpleButton Content="Change Chart" 
                                                              Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" 
-                                                             Margin="0,1,0,1"  FontSize="13"
+                                                             Margin="0,1,0,1"  FontSize="13" FontWeight="Normal"
                                                              FontFamily="Microsoft YaHei UI" BorderThickness="1" HorizontalContentAlignment="Center" 
-                                                             dx:ThemeManager.ThemeName="Office2019Colorful"
+                                                             dx:ThemeManager.ThemeName="Win10Light"
                                                              Focusable="False"
                                                              Foreground="{StaticResource ForeGroundColor}"
                                                              BorderBrush="{StaticResource ForeGroundColor}"
-                                                             Background="{StaticResource ButtonColor}"
+                                                             Background="{StaticResource ButtonBackColor}"
                                                              Command="{Binding Cmd_ChangeTraceChart}"
                                                              Glyph="{dx:DXImage SvgImages/Dashboards/ConvertTo.svg}"/>
                                         </Grid>
@@ -586,11 +967,14 @@
                         </dxdo:LayoutPanel>
                     </dxdo:TabbedGroup>
 
-                    <dxdo:TabbedGroup>
+                    <dxdo:TabbedGroup FontWeight="Bold" FontFamily="Malgun Gothic" Margin="0,0,5,5">
                         <!--Trace Chart-->
-                        <dxdo:LayoutPanel IsSelectedItem="{Binding SelectTrace, Mode=OneWay}" TabIndex="1" Caption="Trace Chart" ItemWidth="*" Margin="0,2,2,2" FontFamily="Microsoft YaHei UI"
-                                          ShowCloseButton="False" AllowClose="False" AllowDrag="False" IsTabStop="False">
-                            <Grid Background="#FFEAEAEA">
+                        <dxdo:LayoutPanel Caption="Trace Chart"
+                                          TabIndex="1" ItemWidth="*" Margin="100,2,2,2" FontFamily="Microsoft YaHei UI"
+                                          ShowCloseButton="False" AllowClose="False" AllowDrag="False" IsTabStop="False"
+                                          BorderBrush="#FFE28A31"
+                                          IsSelectedItem="{Binding SelectTrace, Mode=OneWay}" >
+                            <Grid Background="White">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -599,45 +983,32 @@
                                     <RowDefinition Height="50*"/>
                                     <RowDefinition Height="50*"/>
                                 </Grid.RowDefinitions>
-                                <s:SciChartSurface x:Name="Chart1" Grid.Column="0" Grid.Row="0" Padding="0" Margin="5"
-                                                   BorderBrush="{DynamicResource BorderColor}">
+                                <s:SciChartSurface x:Name="Chart1" Grid.Column="0" Grid.Row="0" Padding="0" Margin="5"     
+                                                   ViewportManager="{Binding TRACE_ViewportManager}">
                                     <s:SciChartSurface.RenderableSeries>
-                                        <s:FastLineRenderableSeries Style="{StaticResource LineSeriesStyle}"/>
+                                        <s:FastLineRenderableSeries DataSeries="{Binding TRACE_Series}"
+                                                                    Style="{StaticResource LineSeriesStyle}"/>
                                     </s:SciChartSurface.RenderableSeries>
-
                                     <!--  Create an X Axis  -->
                                     <s:SciChartSurface.XAxis>
-                                        <s:NumericAxis DrawMajorTicks="True" DrawMinorTicks="False" 
+                                        <s:NumericAxis Margin="15,0,0,0" DrawMajorTicks="True" DrawMinorTicks="False" 
                                                DrawMajorGridLines="True" DrawMinorGridLines="False"
-                                               Foreground="{DynamicResource BorderColor}" 
-                                               TickTextBrush="{DynamicResource BorderColor}"
+                                               TickTextBrush="#FF848388"
                                                VisibleRange="{Binding TRACE_XVisibleRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                            <s:NumericAxis.Style>
-                                                <Style TargetType="{x:Type s:NumericAxis}">
-                                                    <Setter Property="MajorGridLineStyle">
-                                                        <Setter.Value>
-                                                            <Style TargetType="{x:Type Line}">
-                                                                <Setter Property="Stroke" Value="{StaticResource MajorColor}"/>
-                                                                <Setter Property="StrokeThickness" Value="1"/>
-                                                            </Style>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style>
-                                            </s:NumericAxis.Style>
                                         </s:NumericAxis>
                                     </s:SciChartSurface.XAxis>
-
                                     <!--  Create a Y Axis with GrowBy  -->
                                     <s:SciChartSurface.YAxis>
                                         <s:NumericAxis DrawMajorTicks="False" DrawMinorTicks="False" MinWidth="40" MaxWidth="40"
                                                DrawMajorGridLines="True" DrawMinorGridLines="False"
-                                               TickTextBrush="{DynamicResource BorderColor}">
+                                               VisibleRange="{Binding TRACE_YVisibleRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               TickTextBrush="#FF848388">
                                             <s:NumericAxis.Style>
                                                 <Style TargetType="{x:Type s:NumericAxis}">
                                                     <Setter Property="MajorGridLineStyle">
                                                         <Setter.Value>
                                                             <Style TargetType="{x:Type Line}">
-                                                                <Setter Property="Stroke" Value="{StaticResource MajorColor}"/>
+                                                                <Setter Property="Stroke" Value="#FFDEDEE0"/>
                                                                 <Setter Property="StrokeThickness" Value="1"/>
                                                             </Style>
                                                         </Setter.Value>
@@ -646,7 +1017,6 @@
                                             </s:NumericAxis.Style>
                                         </s:NumericAxis>
                                     </s:SciChartSurface.YAxis>
-
                                     <s:SciChartSurface.ChartModifier>
                                         <s:ModifierGroup>
                                             <!--<s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>-->
@@ -660,20 +1030,22 @@
 
                                 <s:HeatmapColorMap Grid.RowSpan="2" Grid.Column="1" Margin="10" 
                                                    HorizontalAlignment="Right" VerticalAlignment="Stretch" 
-                                                   Background="#FFEAEAEA" 
+                                                   Foreground="#FF646464"
+                                                   Background="White" 
                                                    BorderBrush="#777" BorderThickness="1" 
                                                    ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}, Source={x:Reference Name=HeatmapRenderableSeries1}}" 
                                                    Maximum="{Binding ColorMap.Maximum, Source={x:Reference Name=HeatmapRenderableSeries1}, UpdateSourceTrigger=PropertyChanged}" 
                                                    Minimum="{Binding ColorMap.Minimum, Source={x:Reference Name=HeatmapRenderableSeries1}, UpdateSourceTrigger=PropertyChanged}" 
                                                    Opacity="0.8" TextFormatting="0.00" Orientation="Vertical"/>
 
-                                <s:SciChartSurface Grid.Row="1" Grid.Column="0" Margin="5 5 40 5" Background="#FFEAEAEA">
+                                <s:SciChartSurface Grid.Row="1" Grid.Column="0" Margin="5 5 40 5" Background="Transparent">
                                     <s:SciChartSurface.RenderableSeries>
                                         <s:FastUniformHeatmapRenderableSeries x:Name="HeatmapRenderableSeries1" 
-                                                                      AutoPeakDetection="True">
+                                                                              DataSeries="{Binding TRACE_UniformHeatmapDataSeries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                                              AutoPeakDetection="True">
                                             <s:FastUniformHeatmapRenderableSeries.ColorMap>
                                                 <s:HeatmapColorPalette Minimum="{Binding TRACE_ColorMinEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                               Maximum="{Binding TRACE_ColorMaxEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                                       Maximum="{Binding TRACE_ColorMaxEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                     <GradientStop Offset="0" Color="Transparent" />
                                                     <GradientStop Offset="0.0001" Color="{StaticResource ColorMapColor_1}" />
                                                     <GradientStop Offset="0.2" Color="{StaticResource ColorMapColor_2}" />
@@ -689,7 +1061,164 @@
 
                                     <s:SciChartSurface.XAxis>
                                         <s:NumericAxis VisibleRange="{Binding XAxis.VisibleRange, Mode=TwoWay, Source={x:Reference Name=Chart1}}"
+                                                       Margin="15,0,0,0"
+                                                       AxisTitle="Distance" Style="{StaticResource AxisStyle}"
+                                                       TickTextBrush="{StaticResource ForeGroundColor}"/>
+                                    </s:SciChartSurface.XAxis>
+
+                                    <s:SciChartSurface.YAxis>
+                                        <s:NumericAxis Style="{StaticResource AxisStyle}" Visibility="Hidden" FlipCoordinates="True"
+                                                       TickTextBrush="{StaticResource ForeGroundColor}"/>
+                                    </s:SciChartSurface.YAxis>
+                                </s:SciChartSurface>
+                            </Grid>
+                        </dxdo:LayoutPanel>
+
+                        <!--Reference, Operation Chart-->
+                        <dxdo:LayoutPanel IsSelectedItem="{Binding SelectOperation, Mode=OneWay}" TabIndex="0" IsTabStop="True" Caption="Operation Chart" ItemWidth="*" Margin="0,2,2,2" ShowCloseButton="False" AllowClose="False" FontFamily="Microsoft YaHei UI">
+                            <Grid Background="#FF262E48">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*"/>
+                                    <RowDefinition Height="50*"/>
+                                </Grid.RowDefinitions>
+                                <s:SciChartSurface x:Name="Chart2" Grid.Column="0" Grid.Row="0" Padding="0" Margin="5"
+                                           s:ThemeManager.Theme="SciChartv7Navy"
+                                           BorderBrush="{DynamicResource BorderColor}"
+                                           ViewportManager="{Binding OPER_ViewportManager}">
+                                    <s:SciChartSurface.Background>
+                                        <RadialGradientBrush Center="0.5,0.5">
+                                            <GradientStop Color="#FF3C476A" Offset="0"/>
+                                            <GradientStop Color="#FF262E48" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </s:SciChartSurface.Background>
+                                    <s:SciChartSurface.RenderableSeries>
+                                        <s:FastLineRenderableSeries DataSeries="{Binding OPER_Series}"
+                                                            Style="{StaticResource LineSeriesStyle}"/>
+                                    </s:SciChartSurface.RenderableSeries>
+
+                                    <!--  Create an X Axis  -->
+                                    <s:SciChartSurface.XAxis>
+                                        <s:NumericAxis DrawMajorTicks="True" DrawMinorTicks="False" 
+                                               DrawMajorGridLines="True" DrawMinorGridLines="False"
+                                               Foreground="{DynamicResource BorderColor}" 
+                                               TickTextBrush="{DynamicResource BorderColor}"
+                                               VisibleRange="{Binding OPER_XVisibleRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                            <s:NumericAxis.Style>
+                                                <Style TargetType="{x:Type s:NumericAxis}">
+                                                    <Setter Property="MajorGridLineStyle">
+                                                        <Setter.Value>
+                                                            <Style TargetType="{x:Type Line}">
+                                                                <Setter Property="Stroke" Value="#FF242A5A"/>
+                                                                <Setter Property="StrokeThickness" Value="1"/>
+                                                            </Style>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </s:NumericAxis.Style>
+                                        </s:NumericAxis>
+                                    </s:SciChartSurface.XAxis>
+
+                                    <!--  Create a Y Axis with GrowBy  -->
+                                    <s:SciChartSurface.YAxis>
+                                        <s:NumericAxis DrawMajorTicks="False" DrawMinorTicks="False" MinWidth="40" MaxWidth="40"
+                                               DrawMajorGridLines="True" DrawMinorGridLines="False"
+                                               VisibleRange="{Binding OPER_YVisibleRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                               TickTextBrush="{DynamicResource BorderColor}">
+                                            <s:NumericAxis.Style>
+                                                <Style TargetType="{x:Type s:NumericAxis}">
+                                                    <Setter Property="MajorGridLineStyle">
+                                                        <Setter.Value>
+                                                            <Style TargetType="{x:Type Line}">
+                                                                <Setter Property="Stroke" Value="#FF242A5A"/>
+                                                                <Setter Property="StrokeThickness" Value="1"/>
+                                                            </Style>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </s:NumericAxis.Style>
+                                        </s:NumericAxis>
+                                    </s:SciChartSurface.YAxis>
+
+                                    <s:SciChartSurface.ChartModifier>
+                                        <s:ModifierGroup>
+                                            <!--<s:ZoomExtentsModifier ExecuteOn="MouseDoubleClick"/>-->
+                                            <!--<s:RubberBandXyZoomModifier IsEnabled="{Binding EnableFFTZoom}"/>-->
+                                            <s:MouseWheelZoomModifier x:Name="mouseWheelZoomModifier2"/>
+                                            <s:ZoomPanModifier ClipModeX="None"/>
+                                            <s:RolloverModifier ShowTooltipOn="Always"/>
+                                        </s:ModifierGroup>
+                                    </s:SciChartSurface.ChartModifier>
+                                    <s:SciChartSurface.Annotations>
+                                        <!--High Threshold-->
+                                        <s:HorizontalLineAnnotation HorizontalAlignment="Stretch"
+                                                            FontSize="13" Foreground="White" IsEditable="False" LabelPlacement="Axis"
+                                                            LabelTextFormatting="0" ShowLabel="True" Stroke="#FFFF6060" BorderThickness="0.5" 
+                                                            Y1="{Binding SystemDataModel.HThreshold, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"
+                                                            YDragStep="1"/>
+                                        <!--Low Threshold-->
+                                        <s:HorizontalLineAnnotation HorizontalAlignment="Stretch"
+                                                            FontSize="13" Foreground="White" IsEditable="False" LabelPlacement="Axis"
+                                                            LabelTextFormatting="0" ShowLabel="True" Stroke="#FFFF6060" BorderThickness="0.5"
+                                                            Y1="{Binding SystemDataModel.LThreshold, Mode=TwoWay, Source={x:Static Application.Current}, UpdateSourceTrigger=PropertyChanged}"
+                                                            YDragStep="1"/>
+                                        <!--Zero Point-->
+                                        <s:HorizontalLineAnnotation HorizontalAlignment="Stretch"
+                                                            FontSize="13" Foreground="{DynamicResource Hamburger_Button.MouseOver.Background}" IsEditable="True" LabelPlacement="Axis"
+                                                            LabelTextFormatting="0" ShowLabel="True" Stroke="White" BorderThickness="1"
+                                                            Y1="0"
+                                                            YDragStep="1"/>
+                                    </s:SciChartSurface.Annotations>
+                                </s:SciChartSurface>
+
+                                <s:HeatmapColorMap Grid.RowSpan="2" Grid.Column="1" Margin="10" 
+                                                   HorizontalAlignment="Right" VerticalAlignment="Stretch" 
+                                                   BorderBrush="#777" BorderThickness="1" 
+                                                   ColorMap="{Binding ColorMap.GradientStops, Converter={StaticResource ColorsToLineatGradientBrushConverter}, Source={x:Reference Name=HeatmapRenderableSeries2}}" 
+                                                   Maximum="{Binding ColorMap.Maximum, Source={x:Reference Name=HeatmapRenderableSeries2}, UpdateSourceTrigger=PropertyChanged}" 
+                                                   Minimum="{Binding ColorMap.Minimum, Source={x:Reference Name=HeatmapRenderableSeries2}, UpdateSourceTrigger=PropertyChanged}" 
+                                                   Opacity="0.8" TextFormatting="0.00" Orientation="Vertical">
+                                    <s:HeatmapColorMap.Background>
+                                        <RadialGradientBrush Center="0.5,0.5">
+                                            <GradientStop Color="#FF262E48" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </s:HeatmapColorMap.Background>
+                                </s:HeatmapColorMap>
+
+                                <s:SciChartSurface Grid.Row="1" Grid.Column="0" Margin="5 5 40 5">
+                                    <s:SciChartSurface.Background>
+                                        <RadialGradientBrush Center="0.5,0.5">
+                                            <GradientStop Color="#FF3C476A" Offset="0"/>
+                                            <GradientStop Color="#FF262E48" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </s:SciChartSurface.Background>
+                                    <s:SciChartSurface.RenderableSeries>
+                                        <s:FastUniformHeatmapRenderableSeries x:Name="HeatmapRenderableSeries2" 
+                                                                      DataSeries="{Binding OPER_UniformHeatmapDataSeries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                                      AutoPeakDetection="True">
+                                            <s:FastUniformHeatmapRenderableSeries.ColorMap>
+                                                <s:HeatmapColorPalette Minimum="{Binding OPER_ColorMinEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                               Maximum="{Binding OPER_ColorMaxEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <GradientStop Offset="0" Color="Transparent" />
+                                                    <GradientStop Offset="0.0001" Color="{StaticResource ColorMapColor_1}" />
+                                                    <GradientStop Offset="0.2" Color="{StaticResource ColorMapColor_2}" />
+                                                    <GradientStop Offset="0.6" Color="{StaticResource ColorMapColor_3}" />
+                                                    <GradientStop Offset="0.7" Color="{StaticResource ColorMapColor_4}" />
+                                                    <GradientStop Offset="0.8" Color="{StaticResource ColorMapColor_5}" />
+                                                    <GradientStop Offset="0.9" Color="{StaticResource ColorMapColor_6}" />
+                                                    <GradientStop Offset="1" Color="{StaticResource ColorMapColor_7}" />
+                                                </s:HeatmapColorPalette>
+                                            </s:FastUniformHeatmapRenderableSeries.ColorMap>
+                                        </s:FastUniformHeatmapRenderableSeries>
+                                    </s:SciChartSurface.RenderableSeries>
+
+                                    <s:SciChartSurface.XAxis>
+                                        <s:NumericAxis VisibleRange="{Binding XAxis.VisibleRange, Mode=TwoWay, Source={x:Reference Name=Chart2}}"
                                                AxisTitle="Distance" Style="{StaticResource AxisStyle}"/>
+                                        <!--<s:NumericAxis AutoRange="Once" VisibleRange="{Binding HitVisibleRange, Mode=TwoWay}" />-->
                                     </s:SciChartSurface.XAxis>
 
                                     <s:SciChartSurface.YAxis>
@@ -698,7 +1227,6 @@
                                 </s:SciChartSurface>
                             </Grid>
                         </dxdo:LayoutPanel>
-
                     </dxdo:TabbedGroup>
                 </dxdo:LayoutGroup>
             </dxdo:LayoutGroup>

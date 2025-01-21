@@ -7,11 +7,22 @@
     <SolidColorBrush x:Key="Hamburger_Button.MouseOver.Background" Color="#FF566184"/>
     <SolidColorBrush x:Key="Hamburger_Button.Selected.Background" Color="#234CB1"/>
     <!-- App Color -->
-
     <SolidColorBrush x:Key="ForeGroundColor">#FF646464</SolidColorBrush>
     <SolidColorBrush x:Key="MajorColor">#EB8317</SolidColorBrush>
     <SolidColorBrush x:Key="MinorColor">#0B4F4E</SolidColorBrush>
-    
+
+    <LinearGradientBrush x:Key="StartButton" EndPoint="1,0.5" StartPoint="0.1,0">
+        <GradientStop Color="#0B4F4E" Offset="1"/>
+        <GradientStop Color="#FFD9FFA3" Offset=".4" />
+        <GradientStop Color="#0B4F4E" Offset="0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="StopButton" EndPoint="1,0.5" StartPoint="0.1,0">
+        <GradientStop Color="#FF970303" Offset="1"/>
+        <GradientStop Color="#FFFDCACA" Offset=".4" />
+        <GradientStop Color="#FF970303" Offset="0"/>
+    </LinearGradientBrush>
+
     <LinearGradientBrush x:Key="BorderColor" EndPoint="1,0.5" StartPoint="0.5,0">
         <GradientStop Color="#FFFFAE00" Offset="1"/>
         <GradientStop Color="#FFC96B5C" Offset=".4"/>
@@ -24,10 +35,16 @@
         <GradientStop Color="#FFEAEAEA" Offset="1"/>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="ButtonColor" StartPoint="0.4,0.1" EndPoint="0.6,1">
+    <LinearGradientBrush x:Key="ButtonBackColor" StartPoint="0.4,0.1" EndPoint="0.6,1">
         <GradientStop Color="#FFF3F3F3" Offset="0"/>
         <GradientStop Color="White" Offset="1"/>
         <GradientStop Color="#FFE6E6E6" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ButtonBorderColor" EndPoint="1,0.5" StartPoint="0.1,0">
+        <GradientStop Color="#FF5D5D5D" Offset="0"/>
+        <GradientStop Color="#FFCBCBCB" Offset=".4"/>
+        <GradientStop Color="#FF5D5D5D" Offset="1"/>
     </LinearGradientBrush>
 
     <!--#region Main View-->
@@ -41,7 +58,7 @@
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0,0,5,0"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
 

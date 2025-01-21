@@ -92,7 +92,7 @@
                                    AllowGlyphTheming="True" Glyph="{dx:DXImage SvgImages/XAF/State_Task_InProgress.svg}">
                     <dxb:BarStaticItem.ContentTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Margin="5,-1,0,1" FontWeight="Normal" FontSize="20" VerticalAlignment="Top" FontFamily="/DSS_AnalysisApp;component/Fonts/#Open 24 Display St"/>
+                            <TextBlock Text="{Binding}" Margin="5,-1,0,1" FontWeight="Normal" FontSize="20" VerticalAlignment="Top" FontFamily="/ApplicationDSTS;component/Fonts/#Open 24 Display St"/>
                         </DataTemplate>
                     </dxb:BarStaticItem.ContentTemplate>
                 </dxb:BarStaticItem>
